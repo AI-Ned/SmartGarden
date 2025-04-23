@@ -19,13 +19,6 @@ dose_time = 2.2  # Time (in seconds) for water dose
 dry_point = 15
 wet_point = 8
 
-def pump_run():
-   for i in pump_channel:
-        #sets which pump is to be ran
-        p = Pump(i)
-        #set the speed and time the pump runs at.
-        p.dose(dose_speed, dose_time)
-
 def need_water():
 
     print(f"Sensor 1 moisture content = {moist_sensor1.moisture}")
