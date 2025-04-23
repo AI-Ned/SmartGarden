@@ -30,7 +30,7 @@ def need_water():
 
     print(f"Sensor 1 moisture content = {moist_sensor1.moisture}")
     if moist_sensor1.moisture > wet_point:
-        pump1.dose(dose_speed, dose_time+0.4)
+        pump1.dose(dose_speed, dose_time+0.4) # time adjuestment to ensure 10ml
         time.sleep(5.0)
 
     print(f"Sensor 2 moisture content = {moist_sensor2.moisture}")
@@ -38,7 +38,7 @@ def need_water():
         pump2.dose(dose_speed, dose_time)
         time.sleep(5.0)
 
-    print(f"Sensor 3 moisture content = {moist_sensor3.moisture}")
+    print(f"Sensor 3 moisture content = {moist_sensor3.moisture}")# time adjustment to ensure 10ml
     if moist_sensor3.moisture > wet_point:
         pump3.dose(dose_speed, dose_time+0.6)
         time.sleep(5.0)
