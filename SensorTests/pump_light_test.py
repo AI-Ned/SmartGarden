@@ -24,9 +24,9 @@ def pumping(lux):
 
 while True:
     #Perform a read of the lux an proximity sensors.
-    ltr559.update_sensor()
+    LTR559.update_sensor()
 
     #retrieve the lux reading.
-    lux = ltr559.get_lux()
+    lux = LTR559.get_lux()
     pumping(lux)
     time.sleep(0.05)
