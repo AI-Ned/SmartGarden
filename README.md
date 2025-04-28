@@ -28,4 +28,4 @@ All code under the sensor tests has been written to check all the hardware is wo
 ## Requirements.
 
 * In order to successfully run an influxdb3 Core database is required to store the data. The connection details can entered via the Settings.yml file. 
-* AI intergration is also a possibiliy, there is an integration built with Ollama API, the connection and model detail can be entered via the settings.yml file.
+* AI intergration is also a possibility, there is an integration built with Ollama API, the connection and model detail can be entered via the settings.yml file.
