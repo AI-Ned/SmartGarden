@@ -1,0 +1,25 @@
+version: 1.0
+
+#Database settings for use with the influxdb3 core database. 
+Influxdatabase:
+  #SmartGardenDatabase #Name of the database where the sensor data is stored. 
+  db_name: example_database 
+   # IP / Hostname for the database server. 
+  db_host: http://192.168.0.0:8181
+  #The access token for authenticating into the database. Use the format ${Environment_variable} 
+  db_token: ${SMARTGARDEN_DATABASE}  
+
+#AI connection settings for Ollama api
+OllamaAI:
+  ai_host: http://192.168.0.0:11434
+  ai_imagepath: /path/to/image/location
+
+#Pump settings -- Based on testing the below will give roughly 10ml of water
+Pump:
+  dose_time: 2.2 # Time (in seconds) for water dose
+  dose_speed = 0.8  # Pump speed for water dose
+
+#Sets the level of moisture. dry point will trigger a watering cycle, which will stop when the wet point is reached. 
+Moisture:
+  dry_point: 17
+  wet_point: 8
