@@ -4,7 +4,7 @@ version: 1.0
 Influxdatabase:
   db_name: SmartGardenDatabase #Name of the database where the sensor data is stored. 
   db_host: http://192.168.0.0:8181 # IP / Hostname for the database server.  
-  db_token: ${SMARTGARDEN_DATABASE:?You need to set the SMARTGARDEN_DATABASE environment variable to match your influxdb access token} #The access token for authenticating into the database. 
+  db_token: ${SMARTGARDEN_DATABASE} #The access token for authenticating into the database. 
 
 #AI connection settings for Ollama api
 OllamaAI:
