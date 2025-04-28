@@ -23,3 +23,9 @@ All code under the sensor tests has been written to check all the hardware is wo
     * including an image of plants, using AI (Ollama Gemma3 12b) to return a predicted health status, plus other parameters. 
 * Store Sensor data in influx database.
 * build a web frontend to display the data. also potentially include a grafana dashboard. 
+
+
+## Requirements.
+
+* In order to successfully run an influxdb3 Core database is required to store the data. The connection details can entered via the Settings.yml file. 
+* AI intergration is also a possibiliy, there is an integration built with Ollama API, the connection and model detail can be entered via the settings.yml file.
