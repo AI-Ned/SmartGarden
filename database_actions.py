@@ -5,10 +5,10 @@ import re
 
 with open('./settings.yml', 'r') as f:
     settings = yaml.load(f, Loader=yaml.SafeLoader)
-db_settings = settings.get("Influxdatabase")
-db_name = db_settings["db_name"]
-db_host = db_settings["db_host"]
-db_token = db_settings["db_token"]
+DB_SETTINGS = settings.get("Influxdatabase")
+DB_NAME = DB_SETTINGS["db_name"]
+DB_HOST = DB_SETTINGS["db_host"]
+DB_TOKEN = DB_SETTINGS["db_token"]
 
 class DatabaseActions:
 
@@ -35,16 +35,16 @@ class DatabaseActions:
                 continue
 
         if action == "POST":
-            url = db_host+"/api/v3/write_lp?db="+database+"&precision=nanosecond&accept_partial=true&no_sync=true"
+            url = DB_HOST+"/api/v3/write_lp?db="+database+"&precision=nanosecond&accept_partial=true&no_sync=true"
             return url
         
         elif action == "GET":
-             url = db_host+"/api/v3/query_sql?db="+database+"&q="+sql
+             url = DB_HOST+"/api/v3/query_sql?db="+database+"&q="+sql
              return url
 
     #Write to the database. 
     def database_write(data):
-        connect = DatabaseActions.build_url("POST",db_name)
-        headers =  {"Authorization": "Bearer "+ DatabaseActions.get_authentication_token(db_token)}
+        connect = DatabaseActions.build_url("POST",DB_NAME)
+        headers =  {"Authorization": "Bearer "+ DatabaseActions.get_authentication_token(DB_TOKEN)}
         data_write = "SmartGardenData sensor_1=BME280,sensor_2=LTR559,sensor_3=GrowMoistureSensor "+data
         requests.post(connect, data=data_write, headers=headers)
