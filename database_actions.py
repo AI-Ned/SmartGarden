@@ -26,7 +26,7 @@ class DatabaseActions:
 
     #build the API URL based on the task PUT, POST, GET etc 
     def build_url(action,database,**kwargs):
-        sql == ""
+        sql = ""
 
         for name, value in kwargs.items():
             if name == "SQL":
@@ -46,5 +46,6 @@ class DatabaseActions:
     def database_write(data):
         connect = DatabaseActions.build_url("POST",DB_NAME)
         headers =  {"Authorization": "Bearer "+ DatabaseActions.get_authentication_token(DB_TOKEN)}
-        data_write = "SmartGardenData sensor_1=BME280,sensor_2=LTR559,sensor_3=GrowMoistureSensor "+data
-        requests.post(connect, data=data_write, headers=headers)
+        data_write = "smart_garden_data,sensor_1=BME280,sensor_2=LTR559,sensor_3=GrowMoistureSensor "+data
+        print(data_write)
+        #requests.post(connect, data=data_write, headers=headers)
