@@ -20,14 +20,14 @@ DOSE_TIME = PUMP_SETTINGS["dose_time"]
 DRY_POINT = MOISTURE_SETTINGS["dry_point"]
 WET_POINT = MOISTURE_SETTINGS["wet_point"]
 
+watering = {1:bool,2:bool,3:bool}
+water_amount = {1:0,2:0,3:0}
+
 #automatically water each plant if the plant requires water. 
 def need_water():
 
     moist_sensor = [ReadSensors.read_sensor("moisture1",0),ReadSensors.read_sensor("moisture2",0),ReadSensors.read_sensor("moisture3",0)]
 
-    watering = {1:bool,2:bool,3:bool}
-    water_amount = {1:int,2:int,3:int}
-    
     i=0
     pump=0
     #When the moisture level reaches the DRY_POINT iterate through each pump, pumping 10ml of water until the WET_POINT is reached.
