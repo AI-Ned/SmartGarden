@@ -18,8 +18,12 @@ OllamaAI:
 Pump:
   dose_time: 2.2 # Time (in seconds) for water dose
   dose_speed: 0.8  # Pump speed for water dose
+  pump1_fine_calibration: 0.4
+  pump2_fine_calibration: 0.0
+  pump3_fine_calibration: 0.6
 
 #Sets the level of moisture. dry point will trigger a watering cycle, which will stop when the wet point is reached. 
 Moisture:
   dry_point: 17
   wet_point: 8
+
