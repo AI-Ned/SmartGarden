@@ -1,7 +1,8 @@
 import yaml
 import time
 from grow.pump import Pump
-from SensorRead import ReadSensors
+from sensor_read import ReadSensors
+from database_actions import DatabaseActions
 
 pump1 = Pump(1)
 pump2 = Pump(2)
@@ -20,41 +21,43 @@ DOSE_TIME = PUMP_SETTINGS["dose_time"]
 DRY_POINT = MOISTURE_SETTINGS["dry_point"]
 WET_POINT = MOISTURE_SETTINGS["wet_point"]
 
-#automatically water each plant if the plant requires water. 
-def need_water():
+watering = {1:bool,2:bool,3:bool}
+water_amount = {1:0,2:0,3:0}
 
-    moist_sensor = [ReadSensors.read_sensor("moisture1",0),ReadSensors.read_sensor("moisture2",0),ReadSensors.read_sensor("moisture3",0)]
-
-    watering = {1:bool,2:bool,3:bool}
-    water_amount = {1:int,2:int,3:int}
-    
-    i=0
-    pump=0
-    #When the moisture level reaches the DRY_POINT iterate through each pump, pumping 10ml of water until the WET_POINT is reached.
-    for x in moist_sensor:
-        i+=1
-        if x >= DRY_POINT or watering[i] == 1:
-            if x >= WET_POINT:
-                watering[i] = 1
-                print(f"Sensor "+str(i)+" moisture content = "+str(x))
-                pumps[pump].dose(DOSE_SPEED, DOSE_TIME+PUMP_SETTINGS["pump"+str(i)+"_fine_calibration"])
-                water_amount[i] += 10
-            else:
-                print(f"Sensor "+str(i)+" moisture content = "+str(x)+" Done Watering!")
-                watering[i] = 0
-        print(f"Sensor "+str(i)+" moisture content = "+str(x)+" Don't Water!")
-        pump+=1
-    
-    #return the amount of water each plant was provided during the watering cycle. 
-    return water_amount
+class AutoWater:
 
 
-while True:
+    #automatically water each plant if the plant requires water. 
+    def need_water(do_write:bool):
 
-        need_water()
-        time.sleep(1)
-        #ReadSensors.read_all(1)
-        time.sleep(10)
+        moist_sensor = [ReadSensors.read_sensor("moisture1",0),ReadSensors.read_sensor("moisture2",0),ReadSensors.read_sensor("moisture3",0)]
 
+        i=0
+        pump=0
+        #When the moisture level reaches the DRY_POINT iterate through each pump, pumping 10ml of water until the WET_POINT is reached.
+        for x in moist_sensor:
+            i+=1
+            if x >= DRY_POINT or watering[i] == 1:
+                if x >= WET_POINT:
+                    watering[i] = 1
+                    print(f"Sensor "+str(i)+" moisture content = "+str(x))
+                    pumps[pump].dose(DOSE_SPEED, DOSE_TIME+PUMP_SETTINGS["pump"+str(i)+"_fine_calibration"])
+                    water_amount[i] += 1
+                else:
+                    print(f"Sensor "+str(i)+" moisture content = "+str(x)+" Done Watering!")
+                    watering[i] = 0
+            else : print(f"Sensor "+str(i)+" moisture content = "+str(x)+" Don't Water!")
+            pump+=1
+
+        if do_write:
+            data = "Planter_1="+str(water_amount[1])+ \
+            "Planter_2="+str(water_amount[2])+ \
+            "planter_3="+str(water_amount[3])
+            
+
+            DatabaseActions.database_write("watering_amounts","liquid=water",data)
+        
+        #return the amount of water each plant was provided during the watering cycle. 
+        return water_amount
     
     

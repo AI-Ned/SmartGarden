@@ -43,8 +43,12 @@ class DatabaseActions:
              return url
 
     #Write to the database. 
-    def database_write(data):
+    def database_write(table, tags, data):
         connect = DatabaseActions.build_url("POST",DB_NAME)
         headers =  {"Authorization": "Bearer "+ DatabaseActions.get_authentication_token(DB_TOKEN)}
-        data_write = "smart_garden_data,sensor_1=BME280,sensor_2=LTR559,sensor_3=GrowMoistureSensor "+data
+        data_write = table+","+tags+" "+data
         requests.post(connect, data=data_write, headers=headers)
+
+
+
+        

@@ -28,7 +28,7 @@ class ReadSensors:
 
         if sensor == "temprature" and do_write:
             temprature = bme280.get_temperature()
-            DatabaseActions.database_write("bme280_temprature="+str(temprature))
+            DatabaseActions.database_write("sensors","sensor=BME280","temprature="+str(temprature))
             return temprature
         elif sensor == "temprature":
             temprature = bme280.get_temperature()
@@ -36,7 +36,7 @@ class ReadSensors:
         
         if sensor == "pressure" and do_write:
             pressure = bme280.get_pressure()
-            DatabaseActions.database_write("bme280_pressure="+str(pressure))
+            DatabaseActions.database_write("sensors","sensor=BME280","pressure="+str(pressure))
             return pressure
         elif sensor == "pressure":
             pressure = bme280.get_pressure()
@@ -44,7 +44,7 @@ class ReadSensors:
         
         if sensor == "humidity" and do_write:
             humidity = bme280.get_humidity()
-            DatabaseActions.database_write("bme280_humidity="+str(humidity))
+            DatabaseActions.database_write("sensors","sensor=BME280","humidity="+str(humidity))
             return humidity
         elif sensor == "humidity":
             humidity = bme280.get_humidity()
@@ -53,7 +53,7 @@ class ReadSensors:
         if sensor == "light" and do_write:
             ltr559.update_sensor()
             lux = ltr559.get_lux()
-            DatabaseActions.database_write("ltr559_lux="+str(lux))
+            DatabaseActions.database_write("sensors","sensor=LTR559","lux="+str(lux))
             return lux
         elif sensor == "light":
             ltr559.update_sensor()
@@ -61,19 +61,19 @@ class ReadSensors:
             return lux
         
         if sensor == "moisture1" and do_write:
-            DatabaseActions.database_write("moisture_sensor_1="+str(moisture_sensor1.moisture))
+            DatabaseActions.database_write("sensors","sensor=GrowMoistureSensor","moisture_sensor_1="+str(moisture_sensor1.moisture))
             return moisture_sensor1.moisture
         elif sensor == "moisture1":
             return moisture_sensor1.moisture
         
         if sensor == "moisture2" and do_write:
-            DatabaseActions.database_write("moisture_sensor_2="+str(moisture_sensor2.moisture))
+            DatabaseActions.database_write("sensors","sensor=GrowMoistureSensor","moisture_sensor_2="+str(moisture_sensor2.moisture))
             return moisture_sensor2.moisture
         elif sensor == "moisture2":
             return moisture_sensor2.moisture
         
         if sensor == "moisture3" and do_write:
-            DatabaseActions.database_write("moisture_sensor_3="+str(moisture_sensor3.moisture))
+            DatabaseActions.database_write("sensors","sensor=GrowMoistureSensor","moisture_sensor_3="+str(moisture_sensor3.moisture))
             return moisture_sensor3.moisture
         elif sensor == "moisture3":
             return moisture_sensor3.moisture
@@ -94,15 +94,16 @@ class ReadSensors:
             }
         
         if do_write:
-            data= "bme280_temprature="+str(bme280.get_temperature())+ \
-                ",bme280_pressure="+str(bme280.get_pressure())+ \
-                ",bme280_humidity="+str(bme280.get_humidity())+ \
-                ",ltr559_lux="+str(ltr559.get_lux())+ \
+            data= "temprature="+str(bme280.get_temperature())+ \
+                ",pressure="+str(bme280.get_pressure())+ \
+                ",humidity="+str(bme280.get_humidity())+ \
+                ",lux="+str(ltr559.get_lux())+ \
                 ",moisture_sensor_1="+str(moisture_sensor1.moisture)+ \
                 ",moisture_sensor_2="+str(moisture_sensor2.moisture)+ \
                 ",moisture_sensor_3="+str(moisture_sensor3.moisture)
             
-            DatabaseActions.database_write(data)
+            #"smart_garden_data,sensor_1=BME280,sensor_2=LTR559,sensor_3=GrowMoistureSensor "+data
+            DatabaseActions.database_write("sensors","sensor=BME280-LTR559-GrowMoistureSensor",data)
 
         return sensor_data
 
