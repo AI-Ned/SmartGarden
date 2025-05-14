@@ -1,5 +1,4 @@
 import yaml
-import time
 from grow.pump import Pump
 from sensor_read import ReadSensors
 from database_actions import DatabaseActions
@@ -50,12 +49,12 @@ class AutoWater:
             pump+=1
 
         if do_write:
-            data = "Planter_1="+str(water_amount[1])+ \
-            "Planter_2="+str(water_amount[2])+ \
-            "planter_3="+str(water_amount[3])
+            if water_amount[1] + water_amount[2] + water_amount[3] > 0: 
+                data = "Planter_1="+str(water_amount[1])+ \
+                ",Planter_2="+str(water_amount[2])+ \
+                ",planter_3="+str(water_amount[3])
             
-
-            DatabaseActions.database_write("watering_amounts","liquid=water",data)
+                DatabaseActions.database_write("watering","liquid=water",data)
         
         #return the amount of water each plant was provided during the watering cycle. 
         return water_amount
