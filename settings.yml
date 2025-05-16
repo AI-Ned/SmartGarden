@@ -1,4 +1,4 @@
-version: 1.0
+version: 1.2
 
 #Database settings for use with the influxdb3 core database. 
 Influxdatabase:
@@ -24,6 +24,12 @@ Pump:
 
 #Sets the level of moisture. dry point will trigger a watering cycle, which will stop when the wet point is reached. 
 Moisture:
-  dry_point: 17
+  dry_point: 13
   wet_point: 8
 
+#image name is the prefix name of the image, this is then followed by the date & time, the finally the file format. 
+ImageSettings:
+  image_name: Strawberry
+  file_type: jpg
+  save_directory: /path/to/directory #The location to save the image
+  compress_image: 0 #boolean value to compress images for storage. 1 = compress, 0 = normal file storage
