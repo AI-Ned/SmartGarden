@@ -31,3 +31,5 @@ Moisture:
 ImageSettings:
   image_name: Strawberry
   file_type: jpg
+  save_directory: /path/to/directory #The location to save the image
+  compress_image: 0 #boolean value to compress images for storage. 1 = compress, 0 = normal file storage
