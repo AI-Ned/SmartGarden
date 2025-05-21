@@ -1,4 +1,5 @@
 import yaml
+import time
 from grow.pump import Pump
 from sensor_read import ReadSensors
 from database_actions import DatabaseActions
@@ -42,6 +43,7 @@ class AutoWater:
                     print(f"Sensor "+str(i)+" moisture content = "+str(x))
                     pumps[pump].dose(DOSE_SPEED, DOSE_TIME+PUMP_SETTINGS["pump"+str(i)+"_fine_calibration"])
                     water_amount[i] += 1
+                    time.sleep(2)
                 else:
                     print(f"Sensor "+str(i)+" moisture content = "+str(x)+" Done Watering!")
                     watering[i] = 0

@@ -16,8 +16,11 @@ OllamaAI:
 
 #Pump settings -- Based on testing the below will give roughly 10ml of water
 Pump:
-  dose_time: 2.2 # Time (in seconds) for water dose
-  dose_speed: 0.8  # Pump speed for water dose
+  # Time (in seconds) for water dose
+  dose_time: 2.2 
+  # Pump speed for water dose
+  dose_speed: 0.8
+  #fine calibration settings per pump (in seconds)  
   pump1_fine_calibration: 0.4
   pump2_fine_calibration: 0.0
   pump3_fine_calibration: 0.6
@@ -31,5 +34,7 @@ Moisture:
 ImageSettings:
   image_name: Strawberry
   file_type: jpg
-  save_directory: /path/to/directory #The location to save the image
-  compress_image: 0 #boolean value to compress images for storage. 1 = compress, 0 = normal file storage
+  #boolean value to compress images for storage. 1 = compress, 0 = normal file storage
+  compress_image: 0 
+  #24 hour representation of the time entered as a whole number value 600 = 6:00am, 1800 = 6:00pm
+  image_times: [600,1200,1800] 
