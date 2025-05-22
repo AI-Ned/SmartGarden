@@ -1,0 +1,14 @@
+[Unit]
+Description=SmartGarden Service
+After=multi-user.target
+
+[Service]
+Type=simple
+User=user
+Group=user
+Environment=SMARTGARDEN_DATABASE=
+ExecStart=python /home/user/SmartGarden/main.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
