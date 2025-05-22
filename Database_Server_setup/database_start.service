@@ -1,0 +1,11 @@
+
+[Unit]
+Description=Start Influxdb3 datanode
+After=network.target
+
+[Service]
+ExecStart=/home/user/database_start.sh
+
+[Install]
+WantedBy=default.target
+
