@@ -19,7 +19,7 @@ def image_schedule():
     time = int(str(now.time())[:2]+str(now.time())[3:5])
 
     for t in IMAGE_TIMES:
-        if int(t) <= int(time) <= int(t)+9:
+        if int(t) <= int(time) <= int(t)+4:
             CameraImage.capture_image()
     return
 
